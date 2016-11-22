@@ -1,0 +1,1 @@
+Copyright for portions of project Foo are held by [original author, year] as part of project Bar. All other copyright for project Foo are held by [your name, year].

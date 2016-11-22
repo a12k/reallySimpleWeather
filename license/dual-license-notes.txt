@@ -1,0 +1,1 @@
+Copyright for portions of project "reallySimpleWeather" are held by James Fleeting, 2016 as part of project "simpleWeather - jQuery Plugin" under the MIT License. All other copyright for project "reallySimpleWeather" are held by Aaron Wieczorek, 2016 under GPL 2.0 License.
