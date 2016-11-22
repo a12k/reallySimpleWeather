@@ -116,7 +116,7 @@ var reallySimpleWeather = {
                 options.success(weather);
 
             } else {
-                options.error("There was a problem retrieving the latest weather information.");
+                options.error("Yahoo is having a problem sending the latest weather. Please try again.");
             }
         };
         return this;

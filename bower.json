@@ -1,0 +1,30 @@
+{
+  "name": "reallysimpleweather",
+  "description": "A javascript weather plugin with zero dependencies.",
+  "main": "reallySimpleWeather-1.0.0.js",
+  "homepage": "https://a12k.io/reallySimpleWeather",
+  "authors": [
+    "Aaron Wieczorek <aaron@a12k.io>"
+  ],
+  "license": "GPL-2.0",
+  "repository": {
+	"type": "git",
+    "url": "git://github.com/a12k/reallySimpleWeather.git"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "keywords": [
+    "javascript",
+    "weather",
+    "plugin",
+	"module",
+    "yahoo",
+	"pure",
+	"simple"
+  ]
+}

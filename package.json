@@ -1,0 +1,46 @@
+{
+  "name": "reallySimpleWeather",
+  "version": "1.0.0",
+  "description": "A javascript weather plugin with zero dependencies.",
+  "keywords": [
+    "javascript",
+    "weather",
+    "plugin",
+	"module",
+	"yahoo",
+	"pure",
+    "simple"
+  ],
+  "homepage": "https://a12k.io/reallySimpleWeather",
+  "bugs": "https://github.com/a12k/reallySimpleWeather/issues",
+  "author": {
+    "name": "Aaron Wieczorek",
+    "email": "aaron@a12k.io",
+    "url": "https://github.com/a12k"
+  },
+  "main": "reallySimpleWeather.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/a12k/reallySimpleWeather.git"
+  },
+  "engines": {
+    "node": ">=0.8.0",
+    "npm": ">=1.2.10"
+  },
+  "licenses": [
+    {
+      "type": "GPL-2.0"
+    }
+  ],
+  "devDependencies": {
+    "gulp": "latest",
+    "gulp-bump": "latest",
+    "gulp-git": "^1.7.0",
+    "gulp-jshint": "latest",
+    "gulp-notify": "latest",
+    "gulp-rename": "latest",
+    "gulp-size": "latest",
+    "gulp-uglify": "latest",
+    "jshint-stylish": "latest"
+  }
+}
