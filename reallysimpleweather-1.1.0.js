@@ -22,7 +22,27 @@ var reallySimpleWeather = {
       var now = new Date();
 
       if(options.wunderkey !== ""){
+		  var autoComplete = 'http://autocomplete.wunderground.com/aq?query=' + options.location + '&format=jsonp';
+		  console.log(encodeURI(autoComplete));
 		  var weatherUrl = "http://api.wunderground.com/api/" + options.wunderkey + "/almanac/astronomy/conditions/forecast/q/CA/San_Francisco.json";
+		  //http://api.wunderground.com/api/e1e020531ca37aba/almanac/astronomy/conditions/forecast/q/CA/San_Francisco.json
+		  //http://api.wunderground.com/api/e1e020531ca37aba/almanac/astronomy/conditions/forecast/q/37.776289,-122.395234.json
+		  	
+			// request to autocomplete wu api to get location data
+			var xhr = new XMLHttpRequest();
+			xhr.open("GET", encodeURI(autoComplete));
+			xhr.send(null);
+			
+			xhr.onreadystatechange = function () {
+				var DONE = 4; // readyState 4 means the request is done.
+				var OK = 200; // status 200 is a successful return.
+				if (xhr.readyState === DONE) 
+				console.log(xhr.readyState);
+				if (xhr.status === OK) 
+				var citydata = JSON.parse(xhr.responseText);
+				location = citydata.RESULTS.lat + ',' + citydata.RESULTS.lon;
+			}
+		
 	  } else {
 		  if(options.location !== "") {
 			var weatherUrl = "https://query.yahooapis.com/v1/public/yql?format=json&rnd=" + now.getFullYear() + now.getMonth() + now.getDay() + now.getHours() + "&diagnostics=true&q=";  
@@ -63,47 +83,30 @@ var reallySimpleWeather = {
 
 						weather.title = "Conditions for " + result.current_observation.display_location.full + " at " + result.current_observation.observation_time; //slice this later
 						weather.temp = result.current_observation.temp_f;
+						weather.temp_c = result.current_observation.temp_c;
+						weather.temp_string = result.current_observation.temperature_string;
 						weather.currently = result.current_observation.weather;
 						weather.high = result.almanac.temp_high.normal.F;
+						weather.high_c = result.almanac.temp_high.normal.C;
 						weather.low = result.almanac.temp_low.normal.F;
+						weather.low_c = result.almanac.temp_low.normal.C;
 						weather.text = weather.currently;
 						weather.humidity = result.current_observation.relative_humidity;
 						weather.pressure = result.current_observation.pressure_mb;
-						//weather.rising = result.atmosphere.rising;
 						weather.visibility = result.current_observation.visibility_km;
 						weather.sunrise = result.sun_phase.sunrise.hour + ":" + result.sun_phase.sunrise.minute;
 						weather.sunset = result.sun_phase.sunset.hour + ":" + result.sun_phase.sunset.minute;
-						//weather.description = result.item.description;
-						weather.city = result.current_observation.city;
-						weather.country = result.current_observation.country;
-						weather.region = result.current_observation.state;
+						weather.city = result.current_observation.display_location.city;
+						weather.country = result.current_observation.display_location.country;
 						weather.updated = result.current_observation.observation_time;
 						weather.link = result.current_observation.forecast_url;
-						//weather.units = {temp: result.units.temperature, distance: result.units.distance, pressure: result.units.pressure, speed: result.units.speed};
-						weather.wind = {chill: result.current_observation.windchill_f, direction: compass[Math.round(result.current_observation.wind_degrees / 22.5)], speed: result.current_observation.wind_mph};
-/*
-						weather.alt = {temp: reallySimpleWeather.getAltTemp(options.unit, result.item.condition.temp), high: reallySimpleWeather.getAltTemp(options.unit, result.item.forecast[0].high), low: reallySimpleWeather.getAltTemp(options.unit, result.item.forecast[0].low)};
-						if(options.unit === "f") {
-						  weather.alt.unit = "c";
-						} else {
-						  weather.alt.unit = "f";
-						}
-
+						weather.wind = {chill: result.current_observation.windchill_f, direction: compass[Math.round(result.current_observation.wind_degrees / 22.5)], speed: result.current_observation.wind_mph};						
 						weather.forecast = [];
-						for(var i=0;i<result.item.forecast.length;i++) {
-						  forecast = result.item.forecast[i];
-						  forecast.alt = {high: reallySimpleWeather.getAltTemp(options.unit, result.item.forecast[i].high), low: reallySimpleWeather.getAltTemp(options.unit, result.item.forecast[i].low)};
-
-						  if(result.item.forecast[i].code == "3200") {
-							forecast.thumbnail = image404;
-							forecast.image = image404;
-						  } else {
-							forecast.thumbnail = "https://s.yimg.com/zz/combo?a/i/us/nws/weather/gr/" + result.item.forecast[i].code + "ds.png";
-							forecast.image = "https://s.yimg.com/zz/combo?a/i/us/nws/weather/gr/" + result.item.forecast[i].code + "d.png";
-						  }
-
+						for(var i=0;i<result.forecast.simpleforecast.forecastday.length;i++) {
+						  forecast = result.forecast.simpleforecast.forecastday[i];					
 						  weather.forecast.push(forecast);
-						}*/
+						}
+						
 						options.success(weather);
 				} else { //deal with Yahoo api
 					var result = data.query.results.channel,
