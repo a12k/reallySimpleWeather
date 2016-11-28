@@ -1,0 +1,25 @@
+<html>
+<head>
+<script src="https://s3-us-west-2.amazonaws.com/reallysimpleweather/reallysimpleweather-1.1.0.min.js"></script>
+</head>
+<body>
+<div id="weather"></div>
+<script>
+reallySimpleWeather.weather({
+	wunderkey: '', // leave blank for Yahoo API
+    location: 'Bend, OR', //your location here, also works in lat/lon
+    woeid: '', // "Where on Earth ID" optional alternative to location
+    unit: 'f', // 'c' also works
+    success: function(weather) {
+      html = '<h2>'+weather.temp+'°'+weather.units.temp+'</h2>';
+      html += '<ul><li>'+weather.city+', '+weather.region+'</li>';
+      html += '<li>'+weather.currently+'</li>';
+      html += '<li>'+weather.wind.direction+' '+weather.wind.speed+' '+weather.units.speed+'</li></ul>';
+	  document.getElementById('weather').innerHTML = html;
+    },
+    error: function(error) {
+	  document.getElementById('weather').innerHTML = '<p>'+error+'</p>';
+    }
+});</script>
+</body>
+</html>

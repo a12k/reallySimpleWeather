@@ -1,0 +1,67 @@
+<html>
+<head>
+<script src="https://s3-us-west-2.amazonaws.com/reallysimpleweather/reallysimpleweather-1.1.0.min.js"></script>
+</head>
+<body>
+<h2>Data Dump for <a href="https://a12k.io/reallysimpleweather">Really Simple Weather</a> Weather Underground API</h2>
+<div id="weather"></div>
+<script>
+reallySimpleWeather.weather({
+	wunderkey: 'e1e020531ca37aba', //e1e020531ca37aba
+    location: 'Bend, OR',
+    woeid: '',
+    unit: 'f',
+    success: function(weather) {
+	  html = '<p>weather.title: '+weather.title+'</p>';
+      html += '<p>weather.temp_f: '+weather.temp_f+'</p>';
+	  html += '<p>weather.temp_c: '+weather.temp_c+'</p>';
+      html += '<p>weather.feelslike_f: '+weather.feelslike_f+'</p>';
+      html += '<p>weather.feelslike_c: '+weather.feelslike_c+'</p>';
+      html += '<p>weather.currently: '+weather.currently+'</p>';
+      html += '<p>weather.high: '+weather.high+'</p>';
+      html += '<p>weather.high_c: '+weather.high_c+'</p>';
+      html += '<p>weather.low: '+weather.low+'</p>';
+      html += '<p>weather.low_c: '+weather.low_c+'</p>';
+      html += '<p>weather.text: '+weather.text+'</p>';
+      html += '<p>weather.humidity: '+weather.humidity+'</p>';
+      html += '<p>weather.pressure: '+weather.pressure+'</p>';
+      html += '<p>weather.visbility_mi: '+weather.visibility_mi+'</p>';
+      html += '<p>weather.visbility_km: '+weather.visibility_km+'</p>';
+      html += '<p>weather.sunrise: '+weather.sunrise+'</p>';
+      html += '<p>weather.sunset: '+weather.sunset+'</p>';
+      html += '<p>weather.city: '+weather.city+'</p>';
+	  html += '<p>weather.state: '+weather.state+'</p>';
+	  html += '<p>weather.state_name: '+weather.state_name+'</p>';
+      html += '<p>weather.country: '+weather.country+'</p>';
+	  html += '<p>weather.full: '+weather.full+'</p>';
+	  html += '<p>weather.zip: '+weather.zip+'</p>';
+	  html += '<p>weather.latitude: '+weather.latitude+'</p>';
+	  html += '<p>weather.longitude: '+weather.longitude+'</p>';
+	  html += '<p>weather.elevation: '+weather.elevation+'</p>';
+      html += '<p>weather.updated: '+weather.updated+'</p>';
+      html += '<p>weather.link: '+weather.link+'</p>';
+
+      html += '<p>weather.wind.chill: '+weather.wind.chill+'</p>';
+      html += '<p>weather.wind.direction: '+weather.wind.direction+'</p>';
+      html += '<p>weather.wind.speed: '+weather.wind.speed+'</p>';
+
+      for(var i=0;i<weather.forecast.length;i++) {
+        html += '<p>weather.forecast['+i+'].date: '+weather.forecast[i].date.day+' '+weather.forecast[i].date.monthname+' '+weather.forecast[i].date.year+'</p>';
+        html += '<p>weather.forecast['+i+'].day: '+weather.forecast[i].date.weekday+'</p>';
+        html += '<p>weather.forecast['+i+'].high: '+weather.forecast[i].high.fahrenheit+'</p>';
+        html += '<p>weather.forecast['+i+'].low: '+weather.forecast[i].low.fahrenheit+'</p>';
+        html += '<p>weather.forecast['+i+'].high.celsius: '+weather.forecast[i].high.celsius+'</p>';
+        html += '<p>weather.forecast['+i+'].low.celsius: '+weather.forecast[i].low.celsius+'</p>';
+        html += '<p>weather.forecast['+i+'].image: '+weather.forecast[i].icon_url+'</p>';
+        html += '<p>weather.forecast['+i+'].text: '+weather.forecast[i].conditions+'</p>';
+      }
+
+	  document.getElementById('weather').innerHTML = html;
+    },
+    error: function(error) {
+	  document.getElementById('weather').innerHTML = '<p>'+error+'</p>';
+    }
+});
+</script>
+</body>
+</html>
